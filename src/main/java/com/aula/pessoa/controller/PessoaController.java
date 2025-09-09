@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pessoas")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class PessoaController {
 
     private final PessoaService service;
@@ -23,7 +24,7 @@ public class PessoaController {
         return new ResponseEntity<>(p, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/listAll")
     public ResponseEntity<List<Pessoa>> findAll() {
         var list = service.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
@@ -41,7 +42,7 @@ public class PessoaController {
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Pessoa> delete(@PathVariable Long id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
